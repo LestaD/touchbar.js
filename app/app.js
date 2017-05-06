@@ -27,6 +27,7 @@ const update = R.curry((wn, tb) => wn.setTouchBar(tb))
 
 class TB {
   static create(element, props, child) {
+
   }
 
   render(root) {
@@ -45,10 +46,6 @@ class Component {
       this.applyComponent()
     }
   }
-
-  applyComponent() {
-    update(win, touchbar(this.render()))
-  }
 }
 
 class TouchBarComponent extends Component {
@@ -64,38 +61,19 @@ class TouchBarComponent extends Component {
     return () => this.setState({ page })
   }
 
-  renderMainPage() {
-    return [
-      this.label({ label: this.state.opened ? 'State: opened' : 'State: closed' }),
-      this.button({ label: 'Another page', click: this.changePage('another') }),
-      this.button({ label: 'Wrong page', click: this.changePage('fofofofofo') }),
-    ]
-  }
-
-  renderAnotherPage() {
-    return [
-      this.label({ label: 'Another page' }),
-      this.button({ label: 'Go back', click: this.changePage('main') })
-    ]
-  }
-
-  renderNotFound() {
-    return [
-      this.label({ label: 'Page not found' }),
-      this.spacer({ size: 'large' }),
-      this.button({ label: 'Go to home', click: this.changePage('main') })
-    ]
-  }
-
   render() {
-    console.log(this.state)
-    switch (this.state.page) {
-      case 'main': return this.renderMainPage()
-      case 'another': return this.renderAnotherPage()
-      default: return this.renderNotFound()
-    }
+    return [
+      TB.create('button', { label: 'Example', click: () => console.log('Example clicked') }),
+      TB.create('spacer', { size: 'large' }),
+      TB.create('label', { label: 'Some label' }),
+      TB.create('popover', { label: 'Popover' }, [
+        TB.create('label', { label: 'Popover content' }),
+        TB.create('spacer', { size: 'large' }),
+        TB.create('slider', { value: 5, minValue: 0, maxValue: 10 }),
+      ]),
+    ]
   }
 }
 
 
-new TouchBarComponent().applyComponent()
+TB.render(TB.create(TouchBarComponent))
