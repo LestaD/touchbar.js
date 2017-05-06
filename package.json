@@ -1,0 +1,11 @@
+{
+  "name": "touchbarjs",
+  "version": "0.1.0",
+  "description": "Easy touchbar for your Electron app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergey Sova <i.am@lestad.net> (https://lestad.top)",
+  "license": "MIT"
+}
